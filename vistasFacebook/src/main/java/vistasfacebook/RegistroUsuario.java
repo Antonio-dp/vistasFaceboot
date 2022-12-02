@@ -15,6 +15,8 @@ import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import logins.FacebookStrategy;
+import logins.LoginContext;
 import peticiones.PeticionUsuario;
 import utils.ConversorFechas;
 import utils.FbConexion;
@@ -28,25 +30,27 @@ import utils.Validaciones;
 public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsuarioObserver {
 
     private IComunicadorVista comunicadorVista;
+    private LoginContext loginContext;
 
     /**
      * Creates new form Registro
      */
     public RegistroUsuario(IComunicadorVista comunicadorVista) {
         initComponents();
+        this.loginContext = new LoginContext();
         this.btnAgregar.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\registrarBtn.png"));
         llenarComboBoxSexo();
         this.comunicadorVista = comunicadorVista;
-        
+
         RegistrarUsuarioEvent.getInstance().suscribirse(this);
         //suscribeRegistrarComentario(this);
         //suscribeRegistrarPublicacion(this);
     }
 
-    public void llenarComboBoxSexo(){
+    public void llenarComboBoxSexo() {
         cbSexo.setModel(new DefaultComboBoxModel(Sexo.values()));
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +94,11 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
 
         facebookBtn.setBackground(new java.awt.Color(212, 237, 231));
         facebookBtn.setBorder(null);
+        facebookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facebookBtnActionPerformed(evt);
+            }
+        });
         jPanel1.add(facebookBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 330, 120, 130));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
@@ -226,33 +235,34 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-<<<<<<< HEAD:vistasFacebook/src/main/java/vistasfacebook/Registro.java
         IConversorFechas conversorFechas = new ConversorFechas();
-=======
-        if(!validarVacios()){
+        if (!validarVacios()) {
             JOptionPane.showMessageDialog(this, "Cuenta con algun campo vacio", "Información", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
->>>>>>> d5fcf00d9ca46fa09bf3089c6904780d4ca31a99:vistasFacebook/src/main/java/vistasfacebook/RegistroUsuario.java
         String nombre = this.txtNombre.getText();
         String password = String.valueOf(this.txtPassword.getPassword());
         String email = this.txtEmail.getText();
         String telefono = this.txtNoCelular.getText();
         Sexo sexo = (Sexo) cbSexo.getSelectedItem();
         Calendar fechaNacimiento = conversorFechas.toCalendar(this.txtFechaNacimiento.getDate());
-        
-        if(!validarPassword(password)){
+
+        if (!validarPassword(password)) {
             JOptionPane.showMessageDialog(this, "La contraseña debe tener un minimo de 8 digitos", "Información", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
-        if(!Validaciones.validarCorreo(email)){
+
+        if (!Validaciones.validarCorreo(email)) {
             JOptionPane.showMessageDialog(this, "El correo no cuenta con un formato correcto", "Información", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if(!Validaciones.validarTelefono(telefono)){
+        if (!Validaciones.validarTelefono(telefono)) {
             JOptionPane.showMessageDialog(this, "El Teléfono no cuenta con un formato correcto", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (!Validaciones.validarFechaNac(fechaNacimiento)) {
+            JOptionPane.showMessageDialog(this, "Debes ser mayor de edad", "Información", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         Usuario usuario = new Usuario(nombre, password, email, telefono, sexo, fechaNacimiento);
@@ -267,7 +277,7 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void txtNoCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoCelularKeyTyped
-        if(txtNoCelular.getText().length() >= 10) {
+        if (txtNoCelular.getText().length() >= 10) {
             evt.consume();
         }
 
@@ -275,7 +285,7 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
         if (((caracter < '0')
                 || (caracter > '9'))
                 && (caracter != '\b')) {
-            evt.consume(); 
+            evt.consume();
         }
     }//GEN-LAST:event_txtNoCelularKeyTyped
 
@@ -283,72 +293,75 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)
                 && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
-        } 
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
-<<<<<<< HEAD:vistasFacebook/src/main/java/vistasfacebook/Registro.java
-=======
     private void btnEntraFacebookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntraFacebookActionPerformed
         try {
             FbConexion fbCon = new FbConexion();
             Usuario usuario = fbCon.authUser();
-            String telefono ="";
-            do{
-               telefono = JOptionPane.showInputDialog("Inserta tu telefono");
-               if(!Validaciones.validarTelefono(telefono)){
-                   JOptionPane.showMessageDialog(this, "Formato de teléfono erroneo");
-               }
-            }while(!Validaciones.validarTelefono(telefono));
+            String telefono = "";
+            do {
+                telefono = JOptionPane.showInputDialog("Inserta tu telefono");
+                if (!Validaciones.validarTelefono(telefono)) {
+                    JOptionPane.showMessageDialog(this, "Formato de teléfono erroneo");
+                }
+            } while (!Validaciones.validarTelefono(telefono));
             usuario.setTelefono(telefono);
             comunicadorVista.iniciarSesionFacebook(usuario);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_btnEntraFacebookActionPerformed
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-        if(txtPassword.getText().length() >= 20) {
+        if (txtPassword.getText().length() >= 20) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "La contraseña debe tener 10 caracteres o menos");
         }
     }//GEN-LAST:event_txtPasswordKeyTyped
 
-    private boolean validarPassword(String password){
-        if(txtPassword.getText().length()<8){
+    private void facebookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facebookBtnActionPerformed
+        loginContext.setLoginStrategy(new FacebookStrategy(comunicadorVista));
+        loginContext.realizarLogin(null);
+    }//GEN-LAST:event_facebookBtnActionPerformed
+
+    private boolean validarPassword(String password) {
+        if (txtPassword.getText().length() < 8) {
             return false;
         }
         return true;
     }
-    
-    private boolean validarVacios(){
-        if(txtNombre.getText().isEmpty()){
+
+    private boolean validarVacios() {
+        if (txtNombre.getText().isEmpty()) {
             return false;
         }
-        if(txtEmail.getText().isEmpty()){
+        if (txtEmail.getText().isEmpty()) {
             return false;
         }
-        if(txtFechaNacimiento.getText().isEmpty()){
+        if (txtFechaNacimiento.getText().isEmpty()) {
             return false;
         }
-        if(txtNoCelular.getText().isEmpty()){
+        if (txtNoCelular.getText().isEmpty()) {
             return false;
-        }if(txtPassword.getText().isEmpty()){
+        }
+        if (txtPassword.getText().isEmpty()) {
             return false;
         }
         return true;
-    
+
     }
-    
->>>>>>> d5fcf00d9ca46fa09bf3089c6904780d4ca31a99:vistasFacebook/src/main/java/vistasfacebook/RegistroUsuario.java
+
     @Override
     public void onRegistrarUsuario(PeticionUsuario peticionUsuario) {
-        if (peticionUsuario.getStatus() >= 400){
+        if (peticionUsuario.getStatus() >= 400) {
             JOptionPane.showMessageDialog(this, peticionUsuario.getMensajeError(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        } else{
+        } else {
             JOptionPane.showMessageDialog(this, "El usuario se registro correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-  
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -410,5 +423,4 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 
-    
 }

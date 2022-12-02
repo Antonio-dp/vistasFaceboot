@@ -167,6 +167,8 @@ public class MensajePrivado extends javax.swing.JFrame implements IRegistrarNoti
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
+        RegistrarNotificacionEvent.getInstance().desuscribirse(this);
+        ConsultarUsuarioPorNombreEvent.getInstance().desuscribir(this);
         MuroFrm m = new MuroFrm(comunicadorVista, usuario);
         m.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -179,7 +181,14 @@ public class MensajePrivado extends javax.swing.JFrame implements IRegistrarNoti
 
     public void enviarNotificacionPrivada(Usuario destinatario) {
         Calendar fecha = Calendar.getInstance();
-        Notificacion notificacion = new Notificacion(usuario, destinatario, fecha, MotorEnvio.TwilioSMS, this.txtContenido.getText());
+        Notificacion notificacion= new Notificacion();
+        if(this.cbNotificarCorreo.isSelected() && this.cbNotificarSMS.isSelected()){
+            notificacion = new Notificacion(usuario, destinatario, fecha, MotorEnvio.ambos, this.txtContenido.getText());
+        } else if (this.cbNotificarCorreo.isSelected()){
+            notificacion = new Notificacion(usuario, destinatario, fecha, MotorEnvio.simpleJavaMail, this.txtContenido.getText());
+        } else if (this.cbNotificarSMS.isSelected()){
+            notificacion = new Notificacion(usuario, destinatario, fecha, MotorEnvio.TwilioSMS, this.txtContenido.getText());
+        } 
         comunicadorVista.registrarNotificacion(notificacion);
     }
 

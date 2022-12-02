@@ -43,7 +43,11 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         scrollPublicaciones.setVerticalScrollBar(new CustomScrollbar());
         this.scrollPublicaciones.getVerticalScrollBar().setUnitIncrement(25);
         suscribirseEventos();
-       
+        this.btnEditarPerfil.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\editarper.png"));
+        this.btnNotificar.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\notificar.png"));
+        this.botonCrearPublicacion.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\registrarPubli.png"));
+        this.btnHistorial.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\historial.png"));
+        this.buscarEtiquetaBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\search-icon.png"));
         this.publicacionesTxt.setAlignmentX(CENTER_ALIGNMENT);
         this.comunicadorVista = comunicadorVista;
         this.usuario = usuario;
@@ -82,11 +86,12 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         botonCrearPublicacion = new javax.swing.JButton();
         btnNotificar = new javax.swing.JButton();
         btnEditarPerfil = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnHistorial = new javax.swing.JButton();
         scrollPublicaciones = new javax.swing.JScrollPane();
         publicacionesTxt = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Muro Faceboot");
         setResizable(false);
 
         principalPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -119,50 +124,55 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
                 .addGap(29, 29, 29)
                 .addComponent(buscarEtiquetasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buscarEtiquetaBtn)
+                .addComponent(buscarEtiquetaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cancelarBusquedaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(buscarEtiquetasTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(buscarEtiquetaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cancelarBusquedaBtn)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buscarEtiquetaBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buscarEtiquetasTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(cancelarBusquedaBtn)
+                        .addGap(0, 4, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
-        botonCrearPublicacion.setText("Publicacion");
+        botonCrearPublicacion.setBackground(new java.awt.Color(255, 255, 255));
+        botonCrearPublicacion.setBorder(null);
         botonCrearPublicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCrearPublicacionActionPerformed(evt);
             }
         });
 
-        btnNotificar.setText("Notificacion");
+        btnNotificar.setBackground(new java.awt.Color(255, 255, 255));
+        btnNotificar.setBorder(null);
+        btnNotificar.setPreferredSize(new java.awt.Dimension(96, 22));
         btnNotificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNotificarActionPerformed(evt);
             }
         });
 
-        btnEditarPerfil.setText("Editar Perfil");
+        btnEditarPerfil.setBackground(new java.awt.Color(255, 255, 255));
+        btnEditarPerfil.setBorder(null);
         btnEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarPerfilActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Historial Notificaciones");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnHistorial.setBackground(new java.awt.Color(255, 255, 255));
+        btnHistorial.setBorder(null);
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnHistorialActionPerformed(evt);
             }
         });
 
@@ -182,19 +192,13 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
             principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(principalPanelLayout.createSequentialGroup()
-                .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(principalPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(botonCrearPublicacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnNotificar, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalPanelLayout.createSequentialGroup()
-                        .addGap(0, 36, Short.MAX_VALUE)
-                        .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEditarPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(71, 71, 71)
+                .addGap(61, 61, 61)
+                .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEditarPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNotificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonCrearPublicacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(scrollPublicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -204,15 +208,15 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(principalPanelLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(botonCrearPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnNotificar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 85, Short.MAX_VALUE))
+                        .addGap(55, 55, 55)
+                        .addComponent(botonCrearPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNotificar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 29, Short.MAX_VALUE))
                     .addGroup(principalPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPublicaciones)
@@ -273,7 +277,7 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         comunicadorVista.consultarPublicacionesPorEtiqueta(this.buscarEtiquetasTxt.getText());
     }//GEN-LAST:event_buscarEtiquetaBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         this.dispose();
         RegistrarPublicacionEvent.getInstance().desuscribirse(this);
         ConsultarPublicacionesEvent.getInstance().desuscribirse(this);
@@ -281,7 +285,7 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         ConsultarPublicacionesPorHashtagEvent.getInstance().desuscribirse(this);
         HistorialNotificacionesFrm historialNotificaciones = new HistorialNotificacionesFrm(usuario, comunicadorVista);
         historialNotificaciones.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnHistorialActionPerformed
 
     public void actualizarMuro(List<Publicacion> publicaciones) {
 
@@ -306,11 +310,11 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrearPublicacion;
     private javax.swing.JButton btnEditarPerfil;
+    private javax.swing.JButton btnHistorial;
     private javax.swing.JButton btnNotificar;
     private javax.swing.JButton buscarEtiquetaBtn;
     private javax.swing.JTextField buscarEtiquetasTxt;
     private javax.swing.JButton cancelarBusquedaBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel principalPanel;
     private javax.swing.JPanel publicacionesTxt;

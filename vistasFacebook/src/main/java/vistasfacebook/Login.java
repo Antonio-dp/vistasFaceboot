@@ -69,6 +69,7 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
 
         jPanel1.setBackground(new java.awt.Color(243, 250, 242));
         jPanel1.setMinimumSize(new java.awt.Dimension(910, 600));
+        jPanel1.setName(""); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(lblImgUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 70, 80));
 

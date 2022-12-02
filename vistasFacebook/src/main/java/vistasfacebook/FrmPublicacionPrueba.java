@@ -5,6 +5,7 @@
 package vistasfacebook;
 
 import comVista.IComunicadorVista;
+import entidades.EtiquetaUsuario;
 import entidades.Hashtag;
 import entidades.Publicacion;
 import entidades.Usuario;
@@ -31,12 +32,12 @@ import peticiones.PeticionUsuario;
  *
  * @author tonyd
  */
-public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistrarPublicacionObserver, IConsultarUsuarioPorNombreObserver{
+public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistrarPublicacionObserver{
 
     private IComunicadorVista comunicadorVista;
     private Usuario usuario;
     private String path;
-    List<Usuario> etiquetados;
+    List<EtiquetaUsuario> etiquetados;
     List<Hashtag> hashtags;
 
     /**
@@ -55,10 +56,9 @@ public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistr
         initComponents();
         this.usuario = usuario;
         this.hashtags = new ArrayList<Hashtag>();
+        this.etiquetados = new ArrayList<EtiquetaUsuario>();
         this.comunicadorVista = comunicadorVista;
         RegistrarPublicacionEvent.getInstance().suscribirse(this);
-        //RegistrarHashtagsEvent.getInstance().suscribirse(this);
-        //ManejadorEventos.getInstance().suscribirseRegistrarPublicacion(this);
     }
     
     /**
@@ -175,9 +175,13 @@ public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistr
         
         Calendar fecha = Calendar.getInstance();
         guardarHashtags(txtContenido.getText());
+        guardarEtiquetas(txtContenido.getText());
         Publicacion nuevaPublicacion = new Publicacion(usuario, fecha, txtContenido.getText(), path);
         if(!hashtags.isEmpty()){
             nuevaPublicacion.setHashtagPublicacion(hashtags);
+        }
+        if (!etiquetados.isEmpty()) {
+            nuevaPublicacion.setEtiquetasPublicacion(etiquetados);
         }
         comunicadorVista.registrarPublicacion(nuevaPublicacion);
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -191,6 +195,17 @@ public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistr
         }
     }
 
+    public void guardarEtiquetas(String contenido) {
+        String[] palabrasContenido = contenido.split(" ");
+        for (String palabra : palabrasContenido) {
+            if (palabra.startsWith("@")) {
+                String etiqueta = palabra.replace("@", "");
+                System.out.println(etiqueta);
+                EtiquetaUsuario e = new EtiquetaUsuario(palabra.replace("@", ""));
+                etiquetados.add(e);
+            }
+        }
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
         //ManejadorEventos.getInstance().desuscribirseRegistrarPublicacion(this);
@@ -300,10 +315,5 @@ public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistr
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo registrar la publicacion", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
-    }
-
-    @Override
-    public void onConsultarUsuarioPorNombre(PeticionUsuario peticionConsultarUsuarioPorNombre) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -192,15 +192,11 @@ public class EditarPerfil extends javax.swing.JFrame implements IEditarUsuarioOb
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-<<<<<<< HEAD
         IConversorFechas conversorFechas = new ConversorFechas();
-=======
         if(validarVacios()){
             JOptionPane.showMessageDialog(this, "Algún campo se encuentra vacio", "Información", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
->>>>>>> d5fcf00d9ca46fa09bf3089c6904780d4ca31a99
         String nombre = this.txtNombre.getText();
         Sexo sexo = (Sexo) cbSexo.getSelectedItem();
         Calendar fechaNacimiento = conversorFechas.toCalendar(this.txtFechaNacimiento.getDate());
