@@ -32,7 +32,7 @@
                   <Component id="contenidoTxt" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="remitenteLbl" min="-2" pref="143" max="-2" attributes="0"/>
-                      <EmptySpace pref="150" max="32767" attributes="0"/>
+                      <EmptySpace pref="134" max="32767" attributes="0"/>
                       <Component id="fechaLbl" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -50,7 +50,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="contenidoTxt" min="-2" pref="29" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

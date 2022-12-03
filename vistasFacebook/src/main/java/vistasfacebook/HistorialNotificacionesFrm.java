@@ -30,7 +30,7 @@ public class HistorialNotificacionesFrm extends javax.swing.JFrame implements IC
      */
     public HistorialNotificacionesFrm(Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
-        this.jPanel1.setPreferredSize(new Dimension(0, 20));
+        //this.jPanel1.setPreferredSize(new Dimension(0, 20));
         this.usuario = usuario;
         this.comunicadorVista = comunicadorVista;
         ConsultarNotificacionesPorRemitenteEvent.getInstance().suscribirse(this);
@@ -43,7 +43,7 @@ public class HistorialNotificacionesFrm extends javax.swing.JFrame implements IC
         for (Notificacion notificacion: notificaciones) {
             //this.comentariosTextPane.insertComponent(new NotificacionPanel(notificacion));
             NotificacionPanel notificacionPanel = new NotificacionPanel(notificacion);
-            notificacionPanel.setPreferredSize(new Dimension(0, 50));
+            //notificacionPanel.setPreferredSize(new Dimension(0, 50));
             this.notificacionesContainer.add(notificacionPanel, 0);
             this.notificacionesContainer.repaint();
             this.notificacionesContainer.revalidate();
@@ -69,6 +69,7 @@ public class HistorialNotificacionesFrm extends javax.swing.JFrame implements IC
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Historial de Notificaciones");
+        setResizable(false);
         setSize(new java.awt.Dimension(378, 540));
 
         principalPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -93,7 +94,7 @@ public class HistorialNotificacionesFrm extends javax.swing.JFrame implements IC
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18))
@@ -120,14 +121,14 @@ public class HistorialNotificacionesFrm extends javax.swing.JFrame implements IC
         principalPanelLayout.setHorizontalGroup(
             principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1)
         );
         principalPanelLayout.setVerticalGroup(
             principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(principalPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

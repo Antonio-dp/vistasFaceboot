@@ -84,6 +84,7 @@ public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistr
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Publicación");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(241, 250, 238));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

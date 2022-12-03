@@ -36,13 +36,13 @@ public class Validaciones {
         return matcher.find();
     }
 
-    public static boolean validarFechaNac(Calendar fecha) {
-        LocalDate fechaNac = conversor.toLocalDate(fecha);
-        LocalDate hoy = LocalDate.now();
-        long edad = ChronoUnit.YEARS.between(fechaNac, hoy);
-        if (edad < 18) {
-            return true;
-        }
-        return false;
-    }
+//    public static boolean validarFechaNac(Calendar fecha) {
+//        LocalDate fechaNac = conversor.toLocalDate(fecha);
+//        LocalDate hoy = LocalDate.now();
+//        long edad = ChronoUnit.YEARS.between(fechaNac, hoy);
+//        if (edad < 18) {
+//            return true;
+//        }
+//        return false;
+//    }
 }

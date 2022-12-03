@@ -38,7 +38,7 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
     public RegistroUsuario(IComunicadorVista comunicadorVista) {
         initComponents();
         this.loginContext = new LoginContext();
-        this.btnAgregar.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\registrarBtn.png"));
+        this.facebookBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\facebookRegistroBtn.png"));
         llenarComboBoxSexo();
         this.comunicadorVista = comunicadorVista;
 
@@ -86,6 +86,7 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Usuario");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(241, 250, 238));
         jPanel1.setForeground(new java.awt.Color(153, 153, 153));
@@ -261,10 +262,6 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
             return;
         }
 
-        if (!Validaciones.validarFechaNac(fechaNacimiento)) {
-            JOptionPane.showMessageDialog(this, "Debes ser mayor de edad", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
         Usuario usuario = new Usuario(nombre, password, email, telefono, sexo, fechaNacimiento);
         comunicadorVista.registrarUsuario(usuario);
     }//GEN-LAST:event_btnAgregarActionPerformed

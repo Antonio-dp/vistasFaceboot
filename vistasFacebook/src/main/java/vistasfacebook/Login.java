@@ -66,6 +66,7 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Faceboot");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(243, 250, 242));
         jPanel1.setMinimumSize(new java.awt.Dimension(910, 600));
@@ -112,10 +113,10 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
         });
         jPanel1.add(btnEntraFacebook, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 460, 350, 35));
 
-        btnIngresar.setText("INGRESAR");
         btnIngresar.setBackground(new java.awt.Color(37, 161, 142));
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar.setText("INGRESAR");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);

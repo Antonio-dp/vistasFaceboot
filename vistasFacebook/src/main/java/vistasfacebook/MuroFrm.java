@@ -289,6 +289,7 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
 
     public void actualizarMuro(List<Publicacion> publicaciones) {
 
+        if(publicaciones == null) return;
         this.publicacionesTxt.removeAll();
         this.publicacionesTxt.repaint();
         this.publicacionesTxt.revalidate();

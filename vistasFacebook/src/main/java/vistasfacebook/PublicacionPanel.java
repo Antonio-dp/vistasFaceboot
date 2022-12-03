@@ -107,10 +107,12 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
 //            System.out.println("AA NMMS");
 //            this.comentariosPane.repaint();
 //            this.comentariosPane.revalidate();
-//        }
+//        
+        if(comentarios == null) return;
         this.comentariosPane.removeAll();
         this.comentariosPane.repaint();
         this.comentariosPane.revalidate();
+        
         for (Comentario comentario : comentarios) {
             this.comentariosPane.add(new ComentarioPanel(comentario, usuario, comunicadorVista), 0);
             this.comentariosPane.repaint();
