@@ -49,17 +49,17 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
      */
     public PublicacionPanel(Publicacion publicacion, Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
-        RegistrarComentarioEvent.getInstance().suscribirse(this);
-        ConsultarComentariosEvent.getInstance().suscribirse(this);
-        EliminarComentarioEvent.getInstance().suscribirse(this);
+        suscribirseEventos();
+        this.comunicadorVista = comunicadorVista;
+        this.publicacion = publicacion;
+        this.usuario = usuario;
+        
         this.scrollComentarios.setVerticalScrollBar(new CustomScrollbar(new Color(231,240,228), new Color(187, 255, 164)));
         this.scrollComentarios.getVerticalScrollBar().setUnitIncrement(19);
         this.setPreferredSize(new Dimension(584, 645));
         this.jPanel1.setBorder(new BorderRadius(13));
         deleteBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\trashIcon.png"));
-        this.comunicadorVista = comunicadorVista;
-        this.publicacion = publicacion;
-        this.usuario = usuario;
+        
         if (publicacion.getUsuario().getId() != usuario.getId()) {
             this.deleteBtn.setVisible(false);
         }
@@ -67,6 +67,12 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
         comunicadorVista.consultarComentariosPorId(publicacion.getId());
     }
 
+    public void suscribirseEventos(){
+        RegistrarComentarioEvent.getInstance().suscribirse(this);
+        ConsultarComentariosEvent.getInstance().suscribirse(this);
+        EliminarComentarioEvent.getInstance().suscribirse(this);
+    }
+    
     public PublicacionPanel() {
         initComponents();
 
@@ -100,14 +106,7 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
         this.comentarioEliminado = comentarioEliminado;
     }
 
-    private void llenarComentarios(List<Comentario> comentarios) {
-//        if(publicacion.getComentarios() == null) {System.out.println("??????"); return;}
-//        if(publicacion.getComentarios().isEmpty()){
-//            this.comentariosPane.removeAll();
-//            System.out.println("AA NMMS");
-//            this.comentariosPane.repaint();
-//            this.comentariosPane.revalidate();
-//        
+    private void llenarComentarios(List<Comentario> comentarios) {     
         if(comentarios == null) return;
         this.comentariosPane.removeAll();
         this.comentariosPane.repaint();
@@ -129,8 +128,6 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
         this.comentariosPane.revalidate();
         this.jPanel1.repaint();
         this.jPanel1.revalidate();
-//        System.out.println("Lleno el comentario: "+comentario.getContenido());
-//        this.comentarioPane.insertComponent(new ComentarioPanel(comentario));
     }
 
     /**
@@ -267,7 +264,7 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
 
     private void btnRegistrarComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarComentarioActionPerformed
         Comentario comentario = new Comentario(usuario,publicacion,Calendar.getInstance(),this.txtComentario.getText());
-        comunicadorVista.RegistrarComentario(comentario);
+        comunicadorVista.registrarComentario(comentario);
     }//GEN-LAST:event_btnRegistrarComentarioActionPerformed
 
 
@@ -287,10 +284,7 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
 
     @Override
     public void onRegistrarComentario(PeticionComentario respuesta) {
-        System.out.println("Hola PUM");
-        
         if (publicacion.getId() == respuesta.getComentario().getPublicacion().getId()) {
-            System.out.println("Soy Homelo Chino");
             llenarComentario(respuesta.getComentario());
         }
     }
@@ -315,9 +309,7 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
     @Override
     public void onEliminarComentario(PeticionComentario respuesta) {
         this.comentarioEliminado= respuesta.getComentario().getPublicacion().getId();
-        System.out.println("Se eliminar");
         if(respuesta.getComentario().getPublicacion().getId() == publicacion.getId()){
-            System.out.println("AAAAAAAAAA");
             this.comunicadorVista.consultarComentariosPorId(publicacion.getId());
         }
     }

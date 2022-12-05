@@ -24,7 +24,7 @@ import utils.IConversorFechas;
  *
  * @author tonyd
  */
-public class EditarPerfil extends javax.swing.JFrame implements IEditarUsuarioObserver {
+public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuarioObserver {
 
     private IComunicadorVista comunicadorVista;
     private Usuario usuario;
@@ -32,7 +32,7 @@ public class EditarPerfil extends javax.swing.JFrame implements IEditarUsuarioOb
     /**
      * Creates new form Registro
      */
-    public EditarPerfil(IComunicadorVista comunicadorVista, Usuario usuario) {
+    public EditarPerfilFrm(IComunicadorVista comunicadorVista, Usuario usuario) {
         initComponents();
         llenarComboBoxSexo();
         this.usuario = usuario;
@@ -204,7 +204,7 @@ public class EditarPerfil extends javax.swing.JFrame implements IEditarUsuarioOb
         usuario.setNombre(nombre);
         usuario.setSexo(sexo);
         usuario.setFechaNacimiento(fechaNacimiento);
-        comunicadorVista.EditarUsuario(usuario);
+        comunicadorVista.editarUsuario(usuario);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtNoCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoCelularKeyTyped

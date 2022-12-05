@@ -8,14 +8,10 @@ import comVista.IComunicadorVista;
 import entidades.Notificacion;
 import entidades.Usuario;
 import events.ConsultarNotificacionesPorRemitenteEvent;
-import events.ConsultarUsuarioEvent;
 import interfaces.IConsultarNotificacionesPorRemitenteObserver;
-import interfaces.IConsultarUsuarioObserver;
-import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JOptionPane;
 import peticiones.PeticionNotificaciones;
-import peticiones.PeticionUsuario;
 
 /**
  *

@@ -21,7 +21,7 @@ import peticiones.PeticionUsuario;
  *
  * @author tonyd
  */
-public class MensajePrivado extends javax.swing.JFrame implements IRegistrarNotificacionObserver, IConsultarUsuarioPorNombreObserver {
+public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarNotificacionObserver, IConsultarUsuarioPorNombreObserver {
 
     private IComunicadorVista comunicadorVista;
     private Usuario usuario;
@@ -31,7 +31,7 @@ public class MensajePrivado extends javax.swing.JFrame implements IRegistrarNoti
      *
      * @param comunicadorVista
      */
-    public MensajePrivado(IComunicadorVista comunicadorVista) {
+    public MensajePrivadoFrm(IComunicadorVista comunicadorVista) {
         initComponents();
         this.comunicadorVista = comunicadorVista;
         txtContenido.setLineWrap(true);
@@ -39,7 +39,7 @@ public class MensajePrivado extends javax.swing.JFrame implements IRegistrarNoti
         ConsultarUsuarioPorNombreEvent.getInstance().suscribirse(this);
     }
 
-    public MensajePrivado(Usuario usuario, IComunicadorVista comunicadorVista) {
+    public MensajePrivadoFrm(Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
         this.usuario = usuario;    
         this.comunicadorVista = comunicadorVista;

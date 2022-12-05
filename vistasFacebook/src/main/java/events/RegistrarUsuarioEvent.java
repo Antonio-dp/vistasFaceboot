@@ -12,7 +12,7 @@ import java.util.List;
 import peticiones.PeticionUsuario;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de RegistarUsuario
  * @author jegav
  */
 public class RegistrarUsuarioEvent implements EventNotifier {

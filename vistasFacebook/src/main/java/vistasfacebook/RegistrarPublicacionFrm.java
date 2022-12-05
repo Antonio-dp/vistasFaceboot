@@ -9,10 +9,7 @@ import entidades.EtiquetaUsuario;
 import entidades.Hashtag;
 import entidades.Publicacion;
 import entidades.Usuario;
-import events.RegistrarHashtagsEvent;
 import events.RegistrarPublicacionEvent;
-import interfaces.IConsultarUsuarioPorNombreObserver;
-import interfaces.IRegistrarHashtagsObserver;
 import interfaces.IRegistrarPublicacionObserver;
 import java.awt.Image;
 import java.io.File;
@@ -24,15 +21,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import peticiones.PeticionHashtags;
 import peticiones.PeticionPublicacion;
-import peticiones.PeticionUsuario;
 
 /**
  *
  * @author tonyd
  */
-public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistrarPublicacionObserver{
+public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegistrarPublicacionObserver{
 
     private IComunicadorVista comunicadorVista;
     private Usuario usuario;
@@ -45,14 +40,14 @@ public class FrmPublicacionPrueba extends javax.swing.JFrame implements IRegistr
      *
      * @param comunicadorVista
      */
-    public FrmPublicacionPrueba(IComunicadorVista comunicadorVista) {
+    public RegistrarPublicacionFrm(IComunicadorVista comunicadorVista) {
         initComponents();
         this.comunicadorVista = comunicadorVista;
         RegistrarPublicacionEvent.getInstance().suscribirse(this);
         txtContenido.setLineWrap(true);
     }
 
-    public FrmPublicacionPrueba(Usuario usuario, IComunicadorVista comunicadorVista) {
+    public RegistrarPublicacionFrm(Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
         this.usuario = usuario;
         this.hashtags = new ArrayList<Hashtag>();

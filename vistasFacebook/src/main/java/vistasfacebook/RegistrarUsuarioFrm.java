@@ -27,7 +27,7 @@ import utils.Validaciones;
  *
  * @author tonyd
  */
-public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsuarioObserver {
+public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistrarUsuarioObserver {
 
     private IComunicadorVista comunicadorVista;
     private LoginContext loginContext;
@@ -35,7 +35,7 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
     /**
      * Creates new form Registro
      */
-    public RegistroUsuario(IComunicadorVista comunicadorVista) {
+    public RegistrarUsuarioFrm(IComunicadorVista comunicadorVista) {
         initComponents();
         this.loginContext = new LoginContext();
         this.facebookBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\facebookRegistroBtn.png"));
@@ -269,7 +269,7 @@ public class RegistroUsuario extends javax.swing.JFrame implements IRegistrarUsu
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         this.dispose();
         RegistrarUsuarioEvent.getInstance().desuscribirse(this);
-        Login login = new Login(comunicadorVista);
+        LoginFrm login = new LoginFrm(comunicadorVista);
         login.setVisible(true);
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 

@@ -12,7 +12,7 @@ import java.util.List;
 import peticiones.PeticionNotificacion;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de RegistrarNotificacion
  * @author tonyd
  */
 public class RegistrarNotificacionEvent implements EventNotifier{

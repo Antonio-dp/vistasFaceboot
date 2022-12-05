@@ -6,17 +6,13 @@ package events;
 
 import conversors.IJsonToObject;
 import conversors.JsonToObject;
-import entidades.Comentario;
-import eventos.Eventos;
 import java.util.ArrayList;
 import java.util.List;
-import peticiones.Peticion;
 import interfaces.IRegistrarComentarioObserver;
 import peticiones.PeticionComentario;
-import peticiones.PeticionUsuario;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de RegistrarComentario
  * @author jegav
  */
 public class RegistrarComentarioEvent implements EventNotifier{

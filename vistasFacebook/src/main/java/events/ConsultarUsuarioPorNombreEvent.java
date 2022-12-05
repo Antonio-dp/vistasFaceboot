@@ -7,13 +7,12 @@ package events;
 import conversors.IJsonToObject;
 import conversors.JsonToObject;
 import interfaces.IConsultarUsuarioPorNombreObserver;
-import interfaces.ILoginObserver;
 import java.util.ArrayList;
 import java.util.List;
 import peticiones.PeticionUsuario;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de ConsultarUsuarioPorNombre
  * @author jegav
  */
 public class ConsultarUsuarioPorNombreEvent implements EventNotifier {

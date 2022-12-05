@@ -43,23 +43,22 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         scrollPublicaciones.setVerticalScrollBar(new CustomScrollbar());
         this.scrollPublicaciones.getVerticalScrollBar().setUnitIncrement(25);
         suscribirseEventos();
-        this.btnEditarPerfil.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\editarper.png"));
-        this.btnNotificar.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\notificar.png"));
-        this.botonCrearPublicacion.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\registrarPubli.png"));
-        this.btnHistorial.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\historial.png"));
-        this.buscarEtiquetaBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\search-icon.png"));
+        cargarImagenes();
         this.publicacionesTxt.setAlignmentX(CENTER_ALIGNMENT);
         this.comunicadorVista = comunicadorVista;
         this.usuario = usuario;
         comunicadorVista.consultarPublicaciones();
         this.scrollPublicaciones.setViewportView(this.publicacionesTxt);
-        //publicacionesTxt.setEditable(false);
         scrollPublicaciones.setSize(new Dimension(700, 504));
         publicacionesTxt.setSize(new Dimension(700, 504));
     }
 
     public void cargarImagenes(){
-        buscarEtiquetaBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\buscarPorEtiqueta.png"));
+        buscarEtiquetaBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\buscarPorEtiqueta.png")); this.btnEditarPerfil.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\editarper.png"));
+        this.btnNotificar.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\notificar.png"));
+        this.botonCrearPublicacion.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\registrarPubli.png"));
+        this.btnHistorial.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\historial.png"));
+        this.buscarEtiquetaBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\search-icon.png"));
     }
     
     public void suscribirseEventos(){
@@ -244,7 +243,7 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         ConsultarPublicacionesEvent.getInstance().desuscribirse(this);
         EliminarPublicacionEvent.getInstance().desuscribirse(this);
         ConsultarPublicacionesPorHashtagEvent.getInstance().desuscribirse(this);
-        FrmPublicacionPrueba pantallaCrearPublicacion = new FrmPublicacionPrueba(usuario, comunicadorVista);
+        RegistrarPublicacionFrm pantallaCrearPublicacion = new RegistrarPublicacionFrm(usuario, comunicadorVista);
         pantallaCrearPublicacion.setVisible(true);
     }//GEN-LAST:event_botonCrearPublicacionActionPerformed
 
@@ -254,7 +253,7 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         ConsultarPublicacionesEvent.getInstance().desuscribirse(this);
         EliminarPublicacionEvent.getInstance().desuscribirse(this);
         ConsultarPublicacionesPorHashtagEvent.getInstance().desuscribirse(this);
-        EditarPerfil editarPerfil = new EditarPerfil(comunicadorVista, usuario);
+        EditarPerfilFrm editarPerfil = new EditarPerfilFrm(comunicadorVista, usuario);
         editarPerfil.setVisible(true);
     }//GEN-LAST:event_btnEditarPerfilActionPerformed
 
@@ -263,7 +262,7 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         RegistrarPublicacionEvent.getInstance().desuscribirse(this);
         ConsultarPublicacionesEvent.getInstance().desuscribirse(this);
         EliminarPublicacionEvent.getInstance().desuscribirse(this);
-        MensajePrivado mensajePrivado = new MensajePrivado(usuario, comunicadorVista);
+        MensajePrivadoFrm mensajePrivado = new MensajePrivadoFrm(usuario, comunicadorVista);
         mensajePrivado.setVisible(true);
     }//GEN-LAST:event_btnNotificarActionPerformed
 

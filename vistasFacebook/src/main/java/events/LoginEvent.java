@@ -13,7 +13,7 @@ import java.util.List;
 import peticiones.PeticionUsuario;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de Login
  * @author jegav
  */
 public class LoginEvent implements EventNotifier {

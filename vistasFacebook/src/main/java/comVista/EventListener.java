@@ -16,7 +16,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**
- *
+ * Escucha todos los eventos que envia el servidor y decide a quien notificar estos eventos
  * @author jegav
  */
 public class EventListener implements Runnable{

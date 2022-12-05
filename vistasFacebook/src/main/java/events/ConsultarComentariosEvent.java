@@ -12,7 +12,7 @@ import java.util.List;
 import peticiones.PeticionComentarios;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de ConsultarComentarios
  * @author tonyd
  */
 public class ConsultarComentariosEvent implements EventNotifier{
@@ -25,6 +25,10 @@ public class ConsultarComentariosEvent implements EventNotifier{
         conversor = new JsonToObject();
     }
     
+    /**
+     * Crea una instancia del objeto si 
+     * @return 
+     */
     public static ConsultarComentariosEvent getInstance(){
         if(comentariosEvent == null){
             comentariosEvent = new ConsultarComentariosEvent();

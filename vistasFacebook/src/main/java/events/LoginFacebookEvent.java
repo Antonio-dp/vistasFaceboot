@@ -12,22 +12,22 @@ import java.util.List;
 import peticiones.PeticionUsuario;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de Login con Facebook
  * @author Usuario
  */
-public class IniciarSesionFacebookEvent implements EventNotifier{
+public class LoginFacebookEvent implements EventNotifier{
     private List<ILoginFacebookObserver> listeners;
     private IJsonToObject conversor;
-    private static IniciarSesionFacebookEvent loginFacebookEvent;
+    private static LoginFacebookEvent loginFacebookEvent;
     
-    public IniciarSesionFacebookEvent() {
+    public LoginFacebookEvent() {
         this.listeners = new ArrayList();
         conversor = new JsonToObject();
     }
     
-    public static IniciarSesionFacebookEvent getInstance(){
+    public static LoginFacebookEvent getInstance(){
         if(loginFacebookEvent == null){
-            loginFacebookEvent = new IniciarSesionFacebookEvent();
+            loginFacebookEvent = new LoginFacebookEvent();
         }
         return loginFacebookEvent;
     }

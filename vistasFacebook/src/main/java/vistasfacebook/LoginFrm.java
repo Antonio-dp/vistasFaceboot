@@ -22,7 +22,7 @@ import utils.Validaciones;
  *
  * @author tonyd
  */
-public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginFacebookObserver  {
+public class LoginFrm extends javax.swing.JFrame implements ILoginObserver, ILoginFacebookObserver  {
 
     private IComunicadorVista comunicadorVista;
     private LoginContext loginContext;
@@ -31,7 +31,7 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
      * Creates new form Registro
      * @param comunicadorVista
      */
-    public Login(IComunicadorVista comunicadorVista) {
+    public LoginFrm(IComunicadorVista comunicadorVista) {
         initComponents();
         this.loginContext = new LoginContext();
         lblLogo.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\faceboot.png"));
@@ -160,7 +160,7 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
     private void btnRegistrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrateActionPerformed
         this.dispose();
         LoginEvent.getInstance().desuscribir(this);
-        RegistroUsuario registro = new RegistroUsuario(comunicadorVista);
+        RegistrarUsuarioFrm registro = new RegistrarUsuarioFrm(comunicadorVista);
         registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrateActionPerformed
 
@@ -196,13 +196,13 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -211,7 +211,7 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
         IComunicadorVista comunicadorVista = new ComunicadorVista();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login(comunicadorVista).setVisible(true);
+                new LoginFrm(comunicadorVista).setVisible(true);
             }
         });
     }
@@ -269,7 +269,7 @@ public class Login extends javax.swing.JFrame implements ILoginObserver, ILoginF
                 }
             } while (!Validaciones.validarTelefono(telefono));
             usuario.setTelefono(telefono);
-            comunicadorVista.EditarUsuario(usuario);
+            comunicadorVista.editarUsuario(usuario);
         }
     }
 

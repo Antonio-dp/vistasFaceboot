@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Se utiliza para delegar que se debe hacer cuando llega un evento al EventListener
  * @author jegav
  */
 public class ManejadorEventos {
@@ -23,17 +23,13 @@ public class ManejadorEventos {
         eventsNotifier.put(Eventos.registrarPublicacion, RegistrarPublicacionEvent.getInstance());
         eventsNotifier.put(Eventos.registrarComentario, RegistrarComentarioEvent.getInstance());
         eventsNotifier.put(Eventos.Login, LoginEvent.getInstance());
-        eventsNotifier.put(Eventos.consultarUsuarioPorId, ConsultarUsuarioEvent.getInstance());
         eventsNotifier.put(Eventos.consultarPublicaciones, ConsultarPublicacionesEvent.getInstance());
         eventsNotifier.put(Eventos.consultarComentarios, ConsultarComentariosEvent.getInstance());
-        eventsNotifier.put(Eventos.eliminarUsuario, EliminarUsuarioEvent.getInstance());
         eventsNotifier.put(Eventos.editarPerfil, EditarUsuarioEvent.getInstance());
         eventsNotifier.put(Eventos.eliminarPublicacion, EliminarPublicacionEvent.getInstance());
-        eventsNotifier.put(Eventos.iniciarSesionFacebook, IniciarSesionFacebookEvent.getInstance());
+        eventsNotifier.put(Eventos.iniciarSesionFacebook, LoginFacebookEvent.getInstance());
         eventsNotifier.put(Eventos.registrarNotificacion, RegistrarNotificacionEvent.getInstance());
-        eventsNotifier.put(Eventos.registrarHashtags, RegistrarHashtagsEvent.getInstance());
         eventsNotifier.put(Eventos.consultarUsuarioPorNombre, ConsultarUsuarioPorNombreEvent.getInstance());
-        eventsNotifier.put(Eventos.consultarHashtagPorTema, ConsultarHashtagPorTemaEvent.getInstance());
         eventsNotifier.put(Eventos.consultarPublicacionesPorHashtag, ConsultarPublicacionesPorHashtagEvent.getInstance());
         eventsNotifier.put(Eventos.consultarNotificacionesPorRemitente, ConsultarNotificacionesPorRemitenteEvent.getInstance());
         eventsNotifier.put(Eventos.eliminarComentario, EliminarComentarioEvent.getInstance());

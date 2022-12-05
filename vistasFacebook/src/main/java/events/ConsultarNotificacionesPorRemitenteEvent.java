@@ -12,7 +12,7 @@ import java.util.List;
 import peticiones.PeticionNotificaciones;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de ConsultarNotificacionesPorRemitente
  * @author jegav
  */
 public class ConsultarNotificacionesPorRemitenteEvent implements EventNotifier {

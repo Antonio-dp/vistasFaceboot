@@ -6,14 +6,13 @@ package events;
 
 import conversors.IJsonToObject;
 import conversors.JsonToObject;
-import interfaces.IConsultarPublicacionesObserver;
 import interfaces.IConsultarPublicacionesPorHashtagObserver;
 import java.util.ArrayList;
 import java.util.List;
 import peticiones.PeticionPublicaciones;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de ConsultarPublicacionesPorHashtag
  * @author jegav
  */
 public class ConsultarPublicacionesPorHashtagEvent implements EventNotifier{

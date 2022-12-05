@@ -12,7 +12,7 @@ import java.util.List;
 import peticiones.PeticionPublicaciones;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de EliminarPublicacion
  * @author tonyd
  */
 public class EliminarPublicacionEvent implements EventNotifier{

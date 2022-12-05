@@ -12,7 +12,7 @@ import java.util.List;
 import peticiones.PeticionComentario;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de EliminarComentario
  * @author tonyd
  */
 public class EliminarComentarioEvent implements EventNotifier {

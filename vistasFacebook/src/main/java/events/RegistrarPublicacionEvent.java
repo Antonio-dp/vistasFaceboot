@@ -12,7 +12,7 @@ import interfaces.IRegistrarPublicacionObserver;
 import peticiones.PeticionPublicacion;
 
 /**
- *
+ * Se encarga de notificar cuando haya ocurrido el evento de RegistrarPublicación
  * @author jegav
  */
 public class RegistrarPublicacionEvent implements EventNotifier{
