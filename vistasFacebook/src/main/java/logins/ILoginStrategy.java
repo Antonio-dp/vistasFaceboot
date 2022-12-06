@@ -7,7 +7,7 @@ package logins;
 import entidades.Usuario;
 
 /**
- *
+ * Interfaz que indica que la clase es una estrategia para realizar un login
  * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface ILoginStrategy {

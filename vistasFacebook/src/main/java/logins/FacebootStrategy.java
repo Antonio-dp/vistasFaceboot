@@ -8,17 +8,28 @@ import comVista.IComunicadorVista;
 import entidades.Usuario;
 
 /**
- *
+ * Estrategia de login que permite realizar un login normal Faceboot
  * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class FacebootStrategy implements ILoginStrategy{
 
+    /**
+     * Permite comunicarse con el servidor
+     */
     private IComunicadorVista comunicadorVista;
 
+    /**
+     * Inicializa el comunicadorVista
+     * @param comunicadorVista instancia de comunicadorvista que se desea setear
+     */
     public FacebootStrategy(IComunicadorVista comunicadorVista) {
         this.comunicadorVista = comunicadorVista;
     }
     
+    /**
+     * Realiza el login con facebook y le envia una petición al servidor
+     * @param usuario usuario que se desea logear
+     */
     @Override
     public void login(Usuario usuario) {
         comunicadorVista.iniciarSesion(usuario);

@@ -15,9 +15,18 @@ import java.util.Map;
  */
 public class ManejadorEventos {
 
+    /**
+     * Instancia unica del manejador de eventos
+     */
     private static ManejadorEventos manejadorEventos;
+    /**
+     * Map con todos los eventos que pueden llegar al EventListener
+     */
     private static Map<String, EventNotifier> eventsNotifier;
 
+    /**
+     * Constructor que introduce todos los datos necesarios para el manejo de eventos
+     */
     private ManejadorEventos() {
         eventsNotifier = new HashMap();
         eventsNotifier.put(Eventos.registrarUsuario, RegistrarUsuarioEvent.getInstance());
@@ -36,6 +45,10 @@ public class ManejadorEventos {
         eventsNotifier.put(Eventos.eliminarComentario, EliminarComentarioEvent.getInstance());
     }
 
+    /**
+     * Crea la instancia de Manejador de Eventos si no existe y la retorna
+     * @return Retorna una instancia del Manejador de eventos
+     */
     public static ManejadorEventos getInstance() {
         if (manejadorEventos == null) {
             manejadorEventos = new ManejadorEventos();
@@ -43,6 +56,11 @@ public class ManejadorEventos {
         return manejadorEventos;
     }
 
+    /**
+     * Retorna un EventNotifier dependiendo de la key del map 
+     * @param evento Key (evento que llega al EventListener)
+     * @return Retorna un eventNotifier dependiendo del parámetro evento
+     */
     public EventNotifier get(String evento) {
         return eventsNotifier.get(evento);
     }
