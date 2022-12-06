@@ -8,11 +8,21 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 /**
- *
- * @author jegav
+ * Interfaz que permite convertir las fechas de Calendar a LocalDate y viceversa
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface IConversorFechas {
+    /**
+     * Permite convertir la fecha dada por su parametro a una de tipo Calendar
+     * @param date fecha a convertir
+     * @return fecha en Calendar
+     */
     public Calendar toCalendar(LocalDate date);
+    /**
+     * Permite convertir la fecha dada por su parametro a una de tipo LocalDate
+     * @param date fecha a convertir
+     * @return fecha en LocalDate
+     */
     public LocalDate toLocalDate(Calendar date);
 }
 

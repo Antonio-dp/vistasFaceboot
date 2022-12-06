@@ -7,9 +7,13 @@ package interfaces;
 import peticiones.PeticionUsuario;
 
 /**
- *
- * @author Usuario
+ * Interfaz para notificar cuando haya ocurrido el evento de Login con Facebook
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface ILoginFacebookObserver {
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param usuario 
+     */
     public void onLoginFacebook(PeticionUsuario usuario);
 }

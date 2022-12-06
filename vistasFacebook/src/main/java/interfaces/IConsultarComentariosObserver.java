@@ -7,9 +7,13 @@ package interfaces;
 import peticiones.PeticionComentarios;
 
 /**
- *
- * @author tonyd
+ * Interfaz para notificar cuando haya ocurrido el evento de ConsultarComentarios
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface IConsultarComentariosObserver {
+    /**
+     * Recibe la peticionComentarios con la accion realizada
+     * @param peticionComentarios 
+     */
     public void onConsultarComentarios(PeticionComentarios peticionComentarios);
 }

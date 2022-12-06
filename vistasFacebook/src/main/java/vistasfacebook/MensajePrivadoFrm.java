@@ -18,11 +18,13 @@ import peticiones.PeticionNotificacion;
 import peticiones.PeticionUsuario;
 
 /**
- *
- * @author tonyd
+ * Frame para realizar mensaje privado
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarNotificacionObserver, IConsultarUsuarioPorNombreObserver {
-
+    /**
+     * Comunicador de vista
+     */
     private IComunicadorVista comunicadorVista;
     private Usuario usuario;
 

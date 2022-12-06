@@ -12,18 +12,26 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- *
- * @author jegav
+ * Clase que permite convertir las fechas de Calendar a LocalDate y viceversa
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class ConversorFechas implements IConversorFechas {
-
+    /**
+     * Permite convertir la fecha dada por su parametro a una de tipo Calendar
+     * @param date fecha a convertir
+     * @return fecha en Calendar
+     */
     public Calendar toCalendar(LocalDate date) {
         Date fechaDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaDate);
         return calendar;
     }
-
+    /**
+     * Permite convertir la fecha dada por su parametro a una de tipo LocalDate
+     * @param date fecha a convertir
+     * @return fecha en LocalDate
+     */
     public LocalDate toLocalDate(Calendar date) {
         TimeZone tz = date.getTimeZone();
         ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();

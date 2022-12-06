@@ -13,11 +13,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
- *
- * @author Usuario
+ * Clase que permite realizar la conexion con facebook para logearte
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class FbConexion {
-
+    /**
+     * Realiza la conexion con facebook y devuelve un
+     * objeto de tipo usuario con los datos obtenidos de facebook
+     * @return Usuario usuario con informacion de facebook
+     */
     public Usuario authUser() {
 
         String domain = "https://localhost/";

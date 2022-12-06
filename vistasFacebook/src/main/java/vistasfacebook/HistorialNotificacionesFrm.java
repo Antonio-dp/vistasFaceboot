@@ -14,24 +14,30 @@ import javax.swing.JOptionPane;
 import peticiones.PeticionNotificaciones;
 
 /**
- *
- * @author jegav
+ * Frame para el historial de notificaciones
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrid
  */
 public class HistorialNotificacionesFrm extends javax.swing.JFrame implements IConsultarNotificacionesPorRemitenteObserver{
 
+    /**
+     * Usuario que realiza la accion
+     */
     private Usuario usuario;
+    /**
+     * Comunicador de la vista
+     */
     private IComunicadorVista comunicadorVista;
     /**
-     * Creates new form HistorialNotificacionesFrm
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
+     * @param usuario usuario que realiza la accion
      */
     public HistorialNotificacionesFrm(Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
-        //this.jPanel1.setPreferredSize(new Dimension(0, 20));
         this.usuario = usuario;
         this.comunicadorVista = comunicadorVista;
         ConsultarNotificacionesPorRemitenteEvent.getInstance().suscribirse(this);
         comunicadorVista.consultarNotificacionesPorRemitente(usuario);
-        //comunicadorVista.cosultarUsuarioPorId(usuario.getId());
     }
     
     public void llenarNotificaciones(List<Notificacion> notificaciones){
@@ -197,7 +203,10 @@ public class HistorialNotificacionesFrm extends javax.swing.JFrame implements IC
     private javax.swing.JPanel notificacionesContainer;
     private javax.swing.JPanel principalPanel;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Recibe la peticionNotificaciones con la accion realizada
+     * @param peticionNotificaciones 
+     */
     @Override
     public void onConsultarNotificacionesPorRemitente(PeticionNotificaciones peticionNotificaciones) {
         System.out.println("Consulta las Notificaciones y Notifica");

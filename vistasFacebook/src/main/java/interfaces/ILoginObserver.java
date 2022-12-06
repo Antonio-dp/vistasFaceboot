@@ -4,13 +4,16 @@
  */
 package interfaces;
 
-import entidades.Usuario;
 import peticiones.PeticionUsuario;
 
 /**
- *
- * @author jegav
+ * Interfaz para notificar cuando haya ocurrido el evento de Login
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface ILoginObserver {
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param usuario 
+     */
     public void onLogin(PeticionUsuario usuario);
 }

@@ -11,20 +11,28 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author jegav
+ * Panel de comentario
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class ComentarioPanel extends javax.swing.JPanel {
-
+    /**
+     * Comentario a cargar
+     */
     Comentario comentario;
+    /**
+     * Usuario que realiza la accion
+     */
     Usuario usuario;
+    /**
+     * Objeto comunicador de la vista
+     */
     IComunicadorVista comunicadorVista;
     
     /**
-     * Creates new form ComentarioPanel
-     * @param comentario
-     * @param usuario
-     * @param comunicadorVista
+     * Constructor que instancia las variables a las de su parametro
+     * @param comentario comentario a cargar
+     * @param usuario usuario que realiza la accion
+     * @param comunicadorVista comunicador con vista
      */
     public ComentarioPanel(Comentario comentario, Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
@@ -37,7 +45,9 @@ public class ComentarioPanel extends javax.swing.JPanel {
         this.comunicadorVista = comunicadorVista;
         llenarComentarios();
     }
-    
+    /**
+     * Metodo que permite cargar la informacion en el Panel
+     */  
     private void llenarComentarios() {
         this.usuarioTxt.setText(comentario.getUsuario().getNombre());
         SimpleDateFormat fechaFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -110,7 +120,10 @@ public class ComentarioPanel extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Boton que permite eliminar comentario
+     * @param evt cuando es presionado
+     */
     private void eliminarComentarioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarComentarioBtnActionPerformed
         int opcionSeleccionada = JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea eliminar el Comentario?");
         if(opcionSeleccionada == JOptionPane.YES_OPTION){

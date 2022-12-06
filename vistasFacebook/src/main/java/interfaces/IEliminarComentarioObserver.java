@@ -4,14 +4,16 @@
  */
 package interfaces;
 
-import entidades.Comentario;
-import java.util.List;
 import peticiones.PeticionComentario;
 
 /**
- *
- * @author tonyd
+ * Se encarga de notificar cuando haya ocurrido el evento de EliminarComentario
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface IEliminarComentarioObserver {
+    /**
+     * Recibe la peticionComentario con la accion realizada
+     * @param respuesta 
+     */
     public void onEliminarComentario(PeticionComentario respuesta);
 }

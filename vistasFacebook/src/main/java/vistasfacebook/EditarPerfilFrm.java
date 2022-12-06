@@ -13,7 +13,6 @@ import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.border.EmptyBorder;
 import peticiones.PeticionUsuario;
 import utils.ConversorFechas;
 import utils.IConversorFechas;
@@ -21,16 +20,22 @@ import utils.IConversorFechas;
 
 
 /**
- *
- * @author tonyd
+ * Frame para editar perfil
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuarioObserver {
-
-    private IComunicadorVista comunicadorVista;
-    private Usuario usuario;
-
     /**
-     * Creates new form Registro
+     * Objeto comunicador de vista
+     */
+    private IComunicadorVista comunicadorVista;
+    /**
+     * Usuario que realiza la accion
+     */
+    private Usuario usuario;
+    /**
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
+     * @param usuario usuario que realiza la accion
      */
     public EditarPerfilFrm(IComunicadorVista comunicadorVista, Usuario usuario) {
         initComponents();
@@ -42,7 +47,10 @@ public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuari
         llenarCampos(usuario);
         EditarUsuarioEvent.getInstance().suscribirse(this);
     }
-    
+    /**
+     * Permite llenar los campos para editar perfil
+     * @param usuario usuario con el que se llenan los campos
+     */
     public void llenarCampos(Usuario usuario){
         IConversorFechas conversorFechas = new ConversorFechas();
         this.txtNombre.setText(usuario.getNombre());
@@ -53,8 +61,9 @@ public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuari
         }
         this.cbSexo.setSelectedItem(usuario.getSexo());
     }
-    
-    
+    /**
+     * Permite llenar el combobox del sexo
+     */
     public void llenarComboBoxSexo(){
         cbSexo.setModel(new DefaultComboBoxModel(Sexo.values()));
     }
@@ -191,7 +200,10 @@ public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuari
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Boton que permite actualizar el usuario
+     * @param evt cuando es presionado
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         IConversorFechas conversorFechas = new ConversorFechas();
         if(!validarVacios()){
@@ -206,7 +218,9 @@ public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuari
         usuario.setFechaNacimiento(fechaNacimiento);
         comunicadorVista.editarUsuario(usuario);
     }//GEN-LAST:event_btnActualizarActionPerformed
-
+    /**
+     * Permite validar que se cumpla con el tamaño del número de teléfono
+     */
     private void txtNoCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoCelularKeyTyped
         if (txtNoCelular.getText().length() >= 10) {
             evt.consume();
@@ -219,22 +233,29 @@ public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuari
             evt.consume(); 
         }
     }//GEN-LAST:event_txtNoCelularKeyTyped
-
+    /**
+     * Permite validar el formato del nombre
+     */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)
                 && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
         } 
     }//GEN-LAST:event_txtNombreKeyTyped
-
+    /**
+     * Permite cancelar la accion de actualizar el usuario
+     * @param evt cuando es presionado
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
         EditarUsuarioEvent.getInstance().desuscribirse(this);
         MuroFrm muro = new MuroFrm(comunicadorVista, usuario);
         muro.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
-
-  
+    /**
+     * Permite validar que no existan campos vacios
+     * @return true si no hay campos vacios
+     */
     private boolean validarVacios(){
         if(txtNombre.getText().isEmpty()){
             return false;
@@ -300,6 +321,10 @@ public class EditarPerfilFrm extends javax.swing.JFrame implements IEditarUsuari
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onEditarUsuario(PeticionUsuario respuesta) {
         if (respuesta.getStatus() >= 400){

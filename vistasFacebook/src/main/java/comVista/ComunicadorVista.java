@@ -7,15 +7,12 @@ package comVista;
 import conversors.IJsonToObject;
 import conversors.JsonToObject;
 import entidades.Comentario;
-import entidades.Hashtag;
 import entidades.Notificacion;
 import entidades.Publicacion;
 import peticiones.Peticion;
 import entidades.Usuario;
 import eventos.Eventos;
-import java.util.List;
 import peticiones.PeticionComentario;
-import peticiones.PeticionHashtags;
 import peticiones.PeticionId;
 import peticiones.PeticionNotificacion;
 import peticiones.PeticionPublicacion;
@@ -24,8 +21,7 @@ import peticiones.PeticionUsuario;
 
 /**
  * Fachada para Comunicar la vista con el server, Manejo de peticiones de vista
- *
- * @author jegav
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class ComunicadorVista implements IComunicadorVista {
 

@@ -4,13 +4,14 @@
  */
 package events;
 
+import interfaces.EventNotifier;
 import eventos.Eventos;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Se utiliza para delegar que se debe hacer cuando llega un evento al EventListener
- * @author jegav
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class ManejadorEventos {
 

@@ -7,9 +7,13 @@ package interfaces;
 import peticiones.PeticionPublicaciones;
 
 /**
- *
- * @author tonyd
+ * Interfaz para notificar cuando haya ocurrido el evento de EliminarPublicacion
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface IEliminarPublicacionObserver {
+    /**
+     * Recibe la peticionPublicaciones con la accion realizada
+     * @param respuesta 
+     */
     public void onEliminarPublicacion(PeticionPublicaciones respuesta);
 }

@@ -9,7 +9,7 @@ import entidades.Usuario;
 
 /**
  *
- * @author jegav
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class FacebootStrategy implements ILoginStrategy{
 

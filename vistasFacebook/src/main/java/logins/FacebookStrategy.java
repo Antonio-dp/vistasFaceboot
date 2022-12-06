@@ -10,7 +10,7 @@ import utils.FbConexion;
 
 /**
  *
- * @author jegav
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class FacebookStrategy implements ILoginStrategy {
 

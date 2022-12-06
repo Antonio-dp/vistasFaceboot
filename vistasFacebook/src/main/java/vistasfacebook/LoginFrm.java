@@ -19,17 +19,21 @@ import peticiones.PeticionUsuario;
 import utils.Validaciones;
 
 /**
- *
- * @author tonyd
+ * Frame para realizar el login
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class LoginFrm extends javax.swing.JFrame implements ILoginObserver, ILoginFacebookObserver  {
-
-    private IComunicadorVista comunicadorVista;
-    private LoginContext loginContext;
-
     /**
-     * Creates new form Registro
-     * @param comunicadorVista
+     * Comunicador con vista
+     */
+    private IComunicadorVista comunicadorVista;
+    /**
+     * Contexto de login
+     */
+    private LoginContext loginContext;
+    /**
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
      */
     public LoginFrm(IComunicadorVista comunicadorVista) {
         initComponents();
@@ -156,14 +160,20 @@ public class LoginFrm extends javax.swing.JFrame implements ILoginObserver, ILog
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Permite registrar el usuario para login
+     * @param evt al presionar el boton
+     */
     private void btnRegistrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrateActionPerformed
         this.dispose();
         LoginEvent.getInstance().desuscribir(this);
         RegistrarUsuarioFrm registro = new RegistrarUsuarioFrm(comunicadorVista);
         registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrateActionPerformed
-
+    /**
+     * Permite realizar el login en la aplicacion
+     * @param evt al presionar el boton
+     */
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         if(!Validaciones.validarCorreo(txtCorreoUser.getText())){
             JOptionPane.showMessageDialog(this, "El correo no cuenta con un formato correcto", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -173,7 +183,10 @@ public class LoginFrm extends javax.swing.JFrame implements ILoginObserver, ILog
         loginContext.setLoginStrategy(new FacebootStrategy(comunicadorVista));
         loginContext.realizarLogin(usuario);
     }//GEN-LAST:event_btnIngresarActionPerformed
-
+    /**
+     * Permite realizar el login por facebook
+     * @param evt al presionar el boton
+     */
     private void btnEntraFacebookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntraFacebookActionPerformed
         loginContext.setLoginStrategy(new FacebookStrategy(comunicadorVista));
         loginContext.realizarLogin(null);
@@ -233,20 +246,27 @@ public class LoginFrm extends javax.swing.JFrame implements ILoginObserver, ILog
     private javax.swing.JTextField txtCorreoUser;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param peticionUsuario
+     */
     @Override
     public void onLogin(PeticionUsuario peticionUsuario) {
         manejarLogin(peticionUsuario);
     }
-
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param usuario 
+     */
     @Override
     public void onLoginFacebook(PeticionUsuario usuario) {        
         manejarLogin(usuario);
     }
-    
+    /**
+     * Permite manejar el login de la aplicacion
+     * @param peticionUsuario usuario validado
+     */
     public void manejarLogin(PeticionUsuario peticionUsuario){
-        System.out.println("Hola PUM");
-        System.out.println("Llego con status " + peticionUsuario.getStatus());
         if (peticionUsuario.getStatus() < 400) {
             verificarTelefono(peticionUsuario.getUsuario());
             this.dispose();
@@ -254,11 +274,13 @@ public class LoginFrm extends javax.swing.JFrame implements ILoginObserver, ILog
             MuroFrm muro = new MuroFrm(comunicadorVista, peticionUsuario.getUsuario());
             muro.setVisible(true);
         } else {
-            System.out.println("HOLA XD");
             JOptionPane.showMessageDialog(this, peticionUsuario.getMensajeError(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    /**
+     * Permite verificar el numero de telefono del usuario a logear
+     * @param usuario usuario con numero a validar
+     */
     public void verificarTelefono(Usuario usuario) {
         if (usuario.getTelefono() == null) {
             String telefono = "";

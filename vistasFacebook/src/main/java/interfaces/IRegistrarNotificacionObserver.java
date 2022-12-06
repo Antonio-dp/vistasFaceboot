@@ -7,9 +7,13 @@ package interfaces;
 import peticiones.PeticionNotificacion;
 
 /**
- *
- * @author tonyd
+ * Interfaz para notificar cuando haya ocurrido el evento de RegistrarNotificacion
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface IRegistrarNotificacionObserver {
+    /**
+     * Recibe la peticionNotificacion con la accion realizada
+     * @param respuesta 
+     */
     public void onRegistrarNotificacion(PeticionNotificacion respuesta);
 }

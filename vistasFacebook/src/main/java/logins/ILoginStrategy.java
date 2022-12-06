@@ -8,7 +8,7 @@ import entidades.Usuario;
 
 /**
  *
- * @author jegav
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface ILoginStrategy {
     public void login(Usuario usuario);

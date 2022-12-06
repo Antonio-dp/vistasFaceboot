@@ -7,9 +7,13 @@ package interfaces;
 import peticiones.PeticionComentario;
 
 /**
- *
- * @author jegav
+ * Interfaz para notificar cuando haya ocurrido el evento de RegistrarComentario
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface IRegistrarComentarioObserver {
+    /**
+     * Recibe la peticionComentario con la accion realizada
+     * @param respuesta 
+     */
     public void onRegistrarComentario(PeticionComentario respuesta);
 }

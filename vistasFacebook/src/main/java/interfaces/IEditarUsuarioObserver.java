@@ -7,9 +7,13 @@ package interfaces;
 import peticiones.PeticionUsuario;
 
 /**
- *
- * @author tonyd
+ * Interfaz para notificar cuando haya ocurrido el evento de EditarUsuario
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public interface IEditarUsuarioObserver {
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param respuesta 
+     */
     public void onEditarUsuario(PeticionUsuario respuesta);
 }
