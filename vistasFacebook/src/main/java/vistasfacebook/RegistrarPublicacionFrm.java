@@ -24,21 +24,34 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import peticiones.PeticionPublicacion;
 
 /**
- *
- * @author tonyd
+ * Frame de registro de publicacion
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegistrarPublicacionObserver{
-
+    /**
+     * Comunicador con la vista
+     */
     private IComunicadorVista comunicadorVista;
+    /**
+     * Usuario que registra la publicacion
+     */
     private Usuario usuario;
+    /**
+     * String del path de la imagen
+     */
     private String path;
+    /**
+     * Lista de usuarios etiquetados
+     */
     List<EtiquetaUsuario> etiquetados;
+    /**
+     * Lista de hashtags
+     */
     List<Hashtag> hashtags;
 
     /**
-     * Creates new form FrmPublicacionPrueba
-     *
-     * @param comunicadorVista
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con la vista
      */
     public RegistrarPublicacionFrm(IComunicadorVista comunicadorVista) {
         initComponents();
@@ -46,7 +59,11 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
         RegistrarPublicacionEvent.getInstance().suscribirse(this);
         txtContenido.setLineWrap(true);
     }
-
+     /**
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
+     * @param usuario usuario que realiza la accion
+     */
     public RegistrarPublicacionFrm(Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
         this.usuario = usuario;
@@ -166,7 +183,10 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Boton que permite guardar una publicacion
+     * @param evt al ser presionado
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
         Calendar fecha = Calendar.getInstance();
@@ -181,7 +201,11 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
         }
         comunicadorVista.registrarPublicacion(nuevaPublicacion);
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    /**
+     * Permite añadir los hashtags del contenido de la publicacion a una lista
+     * de hashtags
+     * @param contenido contenido de la publicacion
+     */
     public void guardarHashtags(String contenido) {
         String[] palabrasContenido = contenido.split(" ");
         for (String palabra: palabrasContenido) {
@@ -190,7 +214,11 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
             }
         }
     }
-
+    /**
+     * Permite añadir las etiquetas de usuarios de la publicacion a una lista
+     * de usuarios etiquetados
+     * @param contenido contenido de la publicacion
+     */
     public void guardarEtiquetas(String contenido) {
         String[] palabrasContenido = contenido.split(" ");
         for (String palabra : palabrasContenido) {
@@ -202,6 +230,10 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
             }
         }
     }
+    /**
+     * Permite regresar al muro
+     * @param evt al ser presionado
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
         //ManejadorEventos.getInstance().desuscribirseRegistrarPublicacion(this);
@@ -209,7 +241,10 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
         MuroFrm m = new MuroFrm(comunicadorVista, usuario);
         m.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    /**
+     * Permite cargar una imagen al crear una publicacion
+     * @param evt al ser presionado
+     */
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -247,7 +282,10 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
             }
         }
     }//GEN-LAST:event_btnImagenActionPerformed
-
+    /**
+     * Valida que el contenido de la publicacion no supere los 255 caracteres
+     * @param evt 
+     */
     private void txtContenidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContenidoKeyTyped
         if (txtContenido.getText().length() == 255) {
             evt.consume();
@@ -302,7 +340,10 @@ public class RegistrarPublicacionFrm extends javax.swing.JFrame implements IRegi
     private javax.swing.JLabel lbltitulo;
     private javax.swing.JTextArea txtContenido;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Recibe la peticionPublicacion con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onRegistrarPublicacion(PeticionPublicacion peticionPublicacion) {
         if (peticionPublicacion.getStatus() < 400) {

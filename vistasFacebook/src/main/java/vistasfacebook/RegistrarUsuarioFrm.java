@@ -7,9 +7,7 @@ package vistasfacebook;
 import comVista.IComunicadorVista;
 import entidades.Usuario;
 import enumeradores.Sexo;
-import events.ManejadorEventos;
 import events.RegistrarUsuarioEvent;
-import interfaces.ILoginFacebookObserver;
 import interfaces.IRegistrarUsuarioObserver;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
@@ -28,12 +26,19 @@ import utils.Validaciones;
  * @author tonyd
  */
 public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistrarUsuarioObserver {
-
+    
+    /**
+     * Comunicador con la vista
+     */
     private IComunicadorVista comunicadorVista;
+    /**
+     * Contexto de login
+     */
     private LoginContext loginContext;
 
     /**
-     * Creates new form Registro
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
      */
     public RegistrarUsuarioFrm(IComunicadorVista comunicadorVista) {
         initComponents();
@@ -43,10 +48,10 @@ public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistra
         this.comunicadorVista = comunicadorVista;
 
         RegistrarUsuarioEvent.getInstance().suscribirse(this);
-        //suscribeRegistrarComentario(this);
-        //suscribeRegistrarPublicacion(this);
     }
-
+    /**
+     * Permite llenar el combobox de sexo
+     */
     public void llenarComboBoxSexo() {
         cbSexo.setModel(new DefaultComboBoxModel(Sexo.values()));
     }
@@ -234,7 +239,10 @@ public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistra
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-
+    /**
+     * Permite agregar un usuario nuevo
+     * @param evt al ser presionado
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         IConversorFechas conversorFechas = new ConversorFechas();
         if (!validarVacios()) {
@@ -265,14 +273,20 @@ public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistra
         Usuario usuario = new Usuario(nombre, password, email, telefono, sexo, fechaNacimiento);
         comunicadorVista.registrarUsuario(usuario);
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+    /**
+     * Permite ir al frame de login
+     * @param evt 
+     */
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         this.dispose();
         RegistrarUsuarioEvent.getInstance().desuscribirse(this);
         LoginFrm login = new LoginFrm(comunicadorVista);
         login.setVisible(true);
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
+    /**
+     * Valida que el numero de telefono sean solo valores numeros con un maximo
+     * de 10 digitos
+     */
     private void txtNoCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoCelularKeyTyped
         if (txtNoCelular.getText().length() >= 10) {
             evt.consume();
@@ -285,7 +299,9 @@ public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistra
             evt.consume();
         }
     }//GEN-LAST:event_txtNoCelularKeyTyped
-
+    /**
+     * Permite validar que el usuario sea solo caracteres alfabeticos
+     */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)
                 && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
@@ -294,42 +310,41 @@ public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistra
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnEntraFacebookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntraFacebookActionPerformed
-        try {
-            FbConexion fbCon = new FbConexion();
-            Usuario usuario = fbCon.authUser();
-            String telefono = "";
-            do {
-                telefono = JOptionPane.showInputDialog("Inserta tu telefono");
-                if (!Validaciones.validarTelefono(telefono)) {
-                    JOptionPane.showMessageDialog(this, "Formato de teléfono erroneo");
-                }
-            } while (!Validaciones.validarTelefono(telefono));
-            usuario.setTelefono(telefono);
-            comunicadorVista.iniciarSesionFacebook(usuario);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_btnEntraFacebookActionPerformed
 
+    }//GEN-LAST:event_btnEntraFacebookActionPerformed
+    /**
+     * Valida que la contraseña tenga 20 caracteres o menos
+     * @param evt 
+     */
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
         if (txtPassword.getText().length() >= 20) {
             evt.consume();
-            JOptionPane.showMessageDialog(this, "La contraseña debe tener 10 caracteres o menos");
+            JOptionPane.showMessageDialog(this, "La contraseña debe tener 8 caracteres o menos");
         }
     }//GEN-LAST:event_txtPasswordKeyTyped
-
+    /**
+     * Permite realizar el login por facebook
+     * @param evt 
+     */
     private void facebookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facebookBtnActionPerformed
         loginContext.setLoginStrategy(new FacebookStrategy(comunicadorVista));
         loginContext.realizarLogin(null);
     }//GEN-LAST:event_facebookBtnActionPerformed
-
+    /**
+     * Valida que la contraseña tenga mas de 8 caracteres
+     * @param password
+     * @return true si la contraseña tiene mas de 8 caracteres
+     */
     private boolean validarPassword(String password) {
         if (txtPassword.getText().length() < 8) {
             return false;
         }
         return true;
     }
-
+    /**
+     * Valida que no existan campos vacios
+     * @return true si no existen campos vacios
+     */
     private boolean validarVacios() {
         if (txtNombre.getText().isEmpty()) {
             return false;
@@ -349,7 +364,10 @@ public class RegistrarUsuarioFrm extends javax.swing.JFrame implements IRegistra
         return true;
 
     }
-
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onRegistrarUsuario(PeticionUsuario peticionUsuario) {
         if (peticionUsuario.getStatus() >= 400) {

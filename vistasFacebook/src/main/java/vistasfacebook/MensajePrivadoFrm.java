@@ -23,15 +23,17 @@ import peticiones.PeticionUsuario;
  */
 public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarNotificacionObserver, IConsultarUsuarioPorNombreObserver {
     /**
-     * Comunicador de vista
+     * Comunicador de la vista
      */
     private IComunicadorVista comunicadorVista;
+    /**
+     * Usuario que realiza la acción
+     */
     private Usuario usuario;
 
     /**
-     * Creates new form FrmPublicacionPrueba
-     *
-     * @param comunicadorVista
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
      */
     public MensajePrivadoFrm(IComunicadorVista comunicadorVista) {
         initComponents();
@@ -40,7 +42,11 @@ public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarN
         RegistrarNotificacionEvent.getInstance().suscribirse(this);
         ConsultarUsuarioPorNombreEvent.getInstance().suscribirse(this);
     }
-
+    /**
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
+     * @param usuario usuario que realiza la accion
+     */
     public MensajePrivadoFrm(Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
         this.usuario = usuario;    
@@ -162,12 +168,18 @@ public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarN
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Consulta el usuario por nombre
+     * @param evt al ser presionado
+     */
     private void btnEnviarMensajePrivadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarMensajePrivadoActionPerformed
         comunicadorVista.consultarUsuarioPorNombre(this.txtDestinatario.getText());
 
     }//GEN-LAST:event_btnEnviarMensajePrivadoActionPerformed
-
+    /**
+     * Permite regresar al muro
+     * @param evt al ser presionado
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
         RegistrarNotificacionEvent.getInstance().desuscribirse(this);
@@ -175,13 +187,18 @@ public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarN
         MuroFrm m = new MuroFrm(comunicadorVista, usuario);
         m.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    /**
+     * Permite validar que el largo del contenido del mensaje sea maximo 255
+     */
     private void txtContenidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContenidoKeyTyped
         if (txtContenido.getText().length() == 255) {
             evt.consume();
         }
     }//GEN-LAST:event_txtContenidoKeyTyped
-
+    /**
+     * 
+     * @param destinatario 
+     */
     public void enviarNotificacionPrivada(Usuario destinatario) {
         Calendar fecha = Calendar.getInstance();
         Notificacion notificacion= new Notificacion();
@@ -212,6 +229,10 @@ public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarN
     private javax.swing.JTextField txtDestinatario;
     // End of variables declaration//GEN-END:variables
 
+     /**
+     * Recibe la peticionPublicacion con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onRegistrarNotificacion(PeticionNotificacion respuesta) {
         if (respuesta.getStatus() < 400) {
@@ -220,7 +241,10 @@ public class MensajePrivadoFrm extends javax.swing.JFrame implements IRegistrarN
             JOptionPane.showMessageDialog(this, respuesta.getMensajeError(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    /**
+     * Recibe la peticionUsuario con la accion realizada
+     * @param peticionConsultarUsuarioPorNombre 
+     */
     @Override
     public void onConsultarUsuarioPorNombre(PeticionUsuario peticion) {
         if (peticion.getStatus() < 400) {

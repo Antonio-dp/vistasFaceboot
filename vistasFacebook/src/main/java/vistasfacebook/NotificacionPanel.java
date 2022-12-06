@@ -8,22 +8,28 @@ import entidades.Notificacion;
 import java.text.SimpleDateFormat;
 
 /**
- *
- * @author jegav
+ * Frame de notificacion
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class NotificacionPanel extends javax.swing.JPanel {
-
+    /**
+     * Notificacion a mostrar
+     */
     public Notificacion notificacion;
     
     /**
-     * Creates new form NotificacionPanel
+     * Instancia la notificacion al valor de su parametro y llena el panel de
+     * notificaciones
+     * @param notificacion notificacion a mostrar 
      */
     public NotificacionPanel(Notificacion notificacion) {
         initComponents();
         this.notificacion = notificacion;
         llenarPanelNotificacion();
     }
-    
+    /**
+     * Permite llenar el panel con una notificacion enviada por el usuario
+     */
     public void llenarPanelNotificacion(){
         this.remitenteLbl.setText("Enviado a: "+notificacion.getDestinatario().getNombre());
         SimpleDateFormat fechaFormat = new SimpleDateFormat("dd/MM/yyyy");

@@ -29,23 +29,34 @@ import utils.BorderRadius;
 import utils.CustomScrollbar;
 
 /**
- *
- * @author jegav
+ * Frame de publicación
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarComentarioObserver,
                                                                     IConsultarComentariosObserver,
                                                                     IEliminarComentarioObserver{
-
+    /**
+     * Publicacion a mostrar
+     */
     private Publicacion publicacion;
+    /**
+     * Usuario que realizó la publicación
+     */
     private Usuario usuario;
+    /**
+     * Comunicador vista
+     */
     private IComunicadorVista comunicadorVista;
+    /**
+     * Comentario eliminado
+     */
     private Integer comentarioEliminado;
     
     /**
-     * Creates new form PublicacionPanel
-     * @param publicacion
-     * @param usuario
-     * @param comunicadorVista
+     * Constructor que instancia las variables a las de su parametro
+     * @param publicacion publicación a mostrar
+     * @param usuario usuario que realizó la publicación
+     * @param comunicadorVista comunicador con la vista
      */
     public PublicacionPanel(Publicacion publicacion, Usuario usuario, IComunicadorVista comunicadorVista) {
         initComponents();
@@ -66,18 +77,24 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
         llenarPanel();
         comunicadorVista.consultarComentariosPorId(publicacion.getId());
     }
-
+    /**
+     * Permite suscribir los eventos al frame
+     */
     public void suscribirseEventos(){
         RegistrarComentarioEvent.getInstance().suscribirse(this);
         ConsultarComentariosEvent.getInstance().suscribirse(this);
         EliminarComentarioEvent.getInstance().suscribirse(this);
     }
-    
+    /**
+     * Constructor por defecto
+     */
     public PublicacionPanel() {
         initComponents();
 
     }
-
+    /**
+     * Permite llenar el panel con una publicacion
+     */
     private void llenarPanel() {
         this.nombreLbl.setText(publicacion.getUsuario().getNombre());
         this.descripcionLbl.setText(publicacion.getTexto());
@@ -97,15 +114,24 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
             this.jPanel1.repaint();
         }
     }
-
+    /**
+     * Obtiene el id del comentario eliminado
+     * @return id del comentario eliminado
+     */
     public Integer getComentarioEliminado() {
         return comentarioEliminado;
     }
-
+    /**
+     * Instancia el id del comentario eliminado al valor del parametro
+     * @param comentarioEliminado id de comentario eliminado
+     */
     public void setComentarioEliminado(Integer comentarioEliminado) {
         this.comentarioEliminado = comentarioEliminado;
     }
-
+    /**
+     * Permite llenar el panel con una lista de comentarios
+     * @param comentarios lista de comentarios a mostrar
+     */
     private void llenarComentarios(List<Comentario> comentarios) {     
         if(comentarios == null) return;
         this.comentariosPane.removeAll();
@@ -120,7 +146,10 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
             this.jPanel1.revalidate();
         }
     }
-
+    /**
+     * Permite llenar el panel con un comentario
+     * @param comentario comentario a mostrar
+     */
     private void llenarComentario(Comentario comentario) {
         
         this.comentariosPane.add(new ComentarioPanel(comentario, usuario, comunicadorVista),0);
@@ -252,7 +281,10 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
 
         add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Boton que permite eliminar una publicacion
+     * @param evt al ser presionado
+     */
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int verificador = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar esta publicacion?");
         if (verificador == 0) {
@@ -261,7 +293,10 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
             fotoEliminada.delete();
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
-
+    /**
+     * Boton que permite registrar un comentario
+     * @param evt al ser presionado
+     */
     private void btnRegistrarComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarComentarioActionPerformed
         Comentario comentario = new Comentario(usuario,publicacion,Calendar.getInstance(),this.txtComentario.getText());
         comunicadorVista.registrarComentario(comentario);
@@ -281,14 +316,20 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
     private javax.swing.JScrollPane scrollComentarios;
     private javax.swing.JTextField txtComentario;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Recibe la peticionComentario con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onRegistrarComentario(PeticionComentario respuesta) {
         if (publicacion.getId() == respuesta.getComentario().getPublicacion().getId()) {
             llenarComentario(respuesta.getComentario());
         }
     }
-
+    /**
+     * Recibe la peticionComentarios con la accion realizada
+     * @param peticionComentarios 
+     */
     @Override
     public void onConsultarComentarios(PeticionComentarios peticionComentarios) {
         if(comentarioEliminado == publicacion.getId()){
@@ -305,7 +346,10 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
         }
         
     }
-
+    /**
+     * Recibe la peticionComentario con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onEliminarComentario(PeticionComentario respuesta) {
         this.comentarioEliminado= respuesta.getComentario().getPublicacion().getId();
@@ -313,7 +357,10 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
             this.comunicadorVista.consultarComentariosPorId(publicacion.getId());
         }
     }
-
+    /**
+     * Permite eliminar el comentario del panel
+     * @param comentario 
+     */
     public void eliminarComentario(Comentario comentario){
         this.comentariosPane.remove(new ComentarioPanel(comentario, usuario, comunicadorVista));
         this.comentariosPane.repaint();

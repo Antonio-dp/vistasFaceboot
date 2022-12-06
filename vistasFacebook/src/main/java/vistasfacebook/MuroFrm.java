@@ -23,19 +23,26 @@ import peticiones.PeticionPublicaciones;
 import utils.CustomScrollbar;
 
 /**
- *
- * @author jegav
+ * Frame de muro de la aplicacion, presenta las publicaciones
+ * @author Jesus Valencia, Antonio del Pardo, Marco Irineo, Giovanni Garrido
  */
 public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacionObserver,
                                                            IConsultarPublicacionesObserver,
                                                            IEliminarPublicacionObserver, 
                                                            IConsultarPublicacionesPorHashtagObserver{
-
+    /**
+     * Comunicador de la vista
+     */
     private IComunicadorVista comunicadorVista;
+    /**
+     * Usuario que realiza la accion
+     */
     private Usuario usuario;
 
     /**
-     * Creates new form MuroFrm
+     * Constructor que instancia las variables a las de su parametro
+     * @param comunicadorVista comunicador con vista
+     * @param usuario usuario que realiza la accion
      */
     public MuroFrm(IComunicadorVista comunicadorVista, Usuario usuario) {
         initComponents();
@@ -52,7 +59,9 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         scrollPublicaciones.setSize(new Dimension(700, 504));
         publicacionesTxt.setSize(new Dimension(700, 504));
     }
-
+    /**
+     * Permite cargar los iconos en los botones
+     */
     public void cargarImagenes(){
         buscarEtiquetaBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\buscarPorEtiqueta.png")); this.btnEditarPerfil.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\editarper.png"));
         this.btnNotificar.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\notificar.png"));
@@ -60,7 +69,9 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         this.btnHistorial.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\historial.png"));
         this.buscarEtiquetaBtn.setIcon(new javax.swing.ImageIcon("src\\main\\java\\imagenes\\search-icon.png"));
     }
-    
+    /**
+     * Permite suscribir los frames a eventos determinados
+     */
     public void suscribirseEventos(){
          RegistrarPublicacionEvent.getInstance().suscribirse(this);
         ConsultarPublicacionesEvent.getInstance().suscribirse(this);
@@ -236,7 +247,10 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Permite crear una publicacion
+     * @param evt al ser presionado
+     */
     private void botonCrearPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearPublicacionActionPerformed
         this.dispose();
         RegistrarPublicacionEvent.getInstance().desuscribirse(this);
@@ -246,7 +260,10 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         RegistrarPublicacionFrm pantallaCrearPublicacion = new RegistrarPublicacionFrm(usuario, comunicadorVista);
         pantallaCrearPublicacion.setVisible(true);
     }//GEN-LAST:event_botonCrearPublicacionActionPerformed
-
+    /**
+     * Permite editar el perfil del usuario
+     * @param evt al ser presionado
+     */
     private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
         this.dispose();
         RegistrarPublicacionEvent.getInstance().desuscribirse(this);
@@ -256,7 +273,10 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         EditarPerfilFrm editarPerfil = new EditarPerfilFrm(comunicadorVista, usuario);
         editarPerfil.setVisible(true);
     }//GEN-LAST:event_btnEditarPerfilActionPerformed
-
+    /**
+     * Permite notificar por mensaje privado
+     * @param evt al ser presionado
+     */
     private void btnNotificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificarActionPerformed
         this.dispose();
         RegistrarPublicacionEvent.getInstance().desuscribirse(this);
@@ -265,17 +285,26 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         MensajePrivadoFrm mensajePrivado = new MensajePrivadoFrm(usuario, comunicadorVista);
         mensajePrivado.setVisible(true);
     }//GEN-LAST:event_btnNotificarActionPerformed
-
+    /**
+     * Permite cancelar la busquedad por hashtags
+     * @param evt al ser presionado
+     */
     private void cancelarBusquedaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBusquedaBtnActionPerformed
         comunicadorVista.consultarPublicaciones();
         this.buscarEtiquetasTxt.setText("");
         this.cancelarBusquedaBtn.setVisible(false);
     }//GEN-LAST:event_cancelarBusquedaBtnActionPerformed
-
+    /**
+     * Permite realizar una busquedad por hashtags
+     * @param evt al ser presionado
+     */
     private void buscarEtiquetaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEtiquetaBtnActionPerformed
         comunicadorVista.consultarPublicacionesPorEtiqueta(this.buscarEtiquetasTxt.getText());
     }//GEN-LAST:event_buscarEtiquetaBtnActionPerformed
-
+    /**
+     * Permite revisar el historial de notificaciones privadas del usuario
+     * @param evt al ser presionado
+     */
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         this.dispose();
         RegistrarPublicacionEvent.getInstance().desuscribirse(this);
@@ -285,9 +314,11 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
         HistorialNotificacionesFrm historialNotificaciones = new HistorialNotificacionesFrm(usuario, comunicadorVista);
         historialNotificaciones.setVisible(true);
     }//GEN-LAST:event_btnHistorialActionPerformed
-
+    /**
+     * Permite actualizar el muro con una lista de publicaciones
+     * @param publicaciones al ser presionado
+     */
     public void actualizarMuro(List<Publicacion> publicaciones) {
-
         if(publicaciones == null) return;
         this.publicacionesTxt.removeAll();
         this.publicacionesTxt.repaint();
@@ -297,14 +328,15 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
             this.publicacionesTxt.repaint();
             this.publicacionesTxt.revalidate();
         }
-        
     }
-
+    /**
+     * Permite actualizar el muro con una publicacion
+     * @param publicacion 
+     */
     public void actualizarMuro(Publicacion publicacion) {
         this.publicacionesTxt.add(new PublicacionPanel(publicacion, usuario, comunicadorVista), 0);
         this.publicacionesTxt.repaint();
         this.publicacionesTxt.revalidate();
-        //this.publicacionesTxt.insertComponent(new PublicacionPanel(publicacion, usuario, comunicadorVista));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -320,22 +352,34 @@ public class MuroFrm extends javax.swing.JFrame implements IRegistrarPublicacion
     private javax.swing.JPanel publicacionesTxt;
     private javax.swing.JScrollPane scrollPublicaciones;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Recibe la peticionPublicacion con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onRegistrarPublicacion(PeticionPublicacion peticionPublicacion) {
         actualizarMuro(peticionPublicacion.getPublicacion());
     }
-
+    /**
+     * Recibe la peticionPublicaciones con la accion realizada
+     * @param peticionPublicaciones 
+     */
     @Override
     public void onConsultarPublicaciones(PeticionPublicaciones peticionPublicaciones) {
         actualizarMuro(peticionPublicaciones.getPublicaciones());
     }
-
+    /**
+     * Recibe la peticionPublicaciones con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onEliminarPublicacion(PeticionPublicaciones respuesta) {
         comunicadorVista.consultarPublicaciones();
     }
-
+    /**
+     * Recibe la peticionPublicaciones con la accion realizada
+     * @param respuesta 
+     */
     @Override
     public void onConsultarPublicacionesPorHashtag(PeticionPublicaciones respuesta) {
         if(respuesta.getStatus()>=400){
