@@ -17,7 +17,6 @@ import logins.FacebookStrategy;
 import logins.LoginContext;
 import peticiones.PeticionUsuario;
 import utils.ConversorFechas;
-import utils.FbConexion;
 import utils.IConversorFechas;
 import utils.Validaciones;
 
