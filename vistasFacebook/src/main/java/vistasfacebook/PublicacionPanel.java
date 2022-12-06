@@ -298,8 +298,13 @@ public class PublicacionPanel extends javax.swing.JPanel implements IRegistrarCo
      * @param evt al ser presionado
      */
     private void btnRegistrarComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarComentarioActionPerformed
-        Comentario comentario = new Comentario(usuario,publicacion,Calendar.getInstance(),this.txtComentario.getText());
-        comunicadorVista.registrarComentario(comentario);
+        if(this.txtComentario.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El comentario esta vacio");
+        }else{
+            Comentario comentario = new Comentario(usuario,publicacion,Calendar.getInstance(),this.txtComentario.getText());
+            comunicadorVista.registrarComentario(comentario); 
+        }
+
     }//GEN-LAST:event_btnRegistrarComentarioActionPerformed
 
 
